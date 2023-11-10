@@ -96,26 +96,6 @@ def Writtt(MaskData,RegionName,Name,PhaseName,Classsfierr):
     band=None
     print('Complete')
 
-def AccuracyMasking(Xgboost3,GT):
-    k=0
-    GT[GT>4]=0
-    GT[GT<1]=0
-
-    a1=np.count_nonzero((GT>=0))
-    PredictXgboost3= np.empty((a1,1))
-    Label0=np.empty((a1,1))
-    for i in range(0,GT.shape[0]):
-          for j in range(0,GT.shape[1]):
-                target = int(GT[i,j])
-                if target==0 :
-                   continue
-                else :
-                    PredictXgboost3[k,0]= Xgboost3[i,j]
-                    Label0[k,0]=GT[i,j]
-                    k=k+1
-    PredictXgboost3=PredictXgboost3[0:k-1]
-    Label0=Label0[0:k-1]
-    return PredictXgboost3,Label0
 
 def EvaluationResult(Label,PredictLabel):
     accuracy = accuracy_score(Label, PredictLabel)
